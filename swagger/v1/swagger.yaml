@@ -25,40 +25,9 @@ paths:
                   type: string
   "/authors":
     get:
-      summary: list authors
-      responses:
-        '200':
-          description: successful
-    post:
-      summary: create author
-      responses:
-        '200':
-          description: successful
-  "/authors/{id}":
-    parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: string
-    get:
-      summary: show author
-      responses:
-        '200':
-          description: successful
-    patch:
-      summary: update author
-      responses:
-        '200':
-          description: successful
-    put:
-      summary: update author
-      responses:
-        '200':
-          description: successful
-    delete:
-      summary: delete author
+      summary: Get all authors
+      tags:
+      - Author
       responses:
         '200':
           description: successful
@@ -111,8 +80,6 @@ paths:
   "/loans":
     get:
       summary: list loans
-      security:
-        - jwt: []
       tags:
       - Loan
       responses:
@@ -120,8 +87,6 @@ paths:
           description: successful
     post:
       summary: Create a new loan
-      security:
-       - jwt: []
       tags:
       - Loan
       parameters: []
@@ -152,8 +117,6 @@ paths:
       schema:
         type: string
     get:
-      security:
-      - jwt: []
       summary: index_by_user loan
       tags:
       - Loan
@@ -204,10 +167,3 @@ servers:
   variables:
     defaultHost:
       default: 127.0.0.1:3000/
-
-components:
-  securitySchemes:
-    jwt:
-      type: apiKey
-      in: header
-      name: Authorization

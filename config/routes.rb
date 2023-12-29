@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
   resources :users
-
+  resources :authors, only: [:index]
   #books
   get '/books/out-of-stock', to: 'books#index_out_of_stock'
   get '/books/search', to: 'books#search'
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :loans, only: [:index, :create]
     get 'loans/users/:user_id', to: 'loans#index_by_user', as: 'user_loans'
 
-  resources :authors
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
