@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
-  resources :users
+  resources :users, only: [:index, :show, :create]
   resources :authors, only: [:index]
+  resources :loans, only: [:index, :create]
+  get 'loans/users/:user_id', to: 'loans#index_by_user', as: 'user_loans'
+  
   #books
   get '/books/out-of-stock', to: 'books#index_out_of_stock'
   get '/books/search', to: 'books#search'
@@ -13,8 +16,7 @@ Rails.application.routes.draw do
   post '/login', to: 'authorization#login'
 
 
-  resources :loans, only: [:index, :create]
-    get 'loans/users/:user_id', to: 'loans#index_by_user', as: 'user_loans'
+
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -125,12 +125,16 @@ paths:
           description: successful
   "/users":
     get:
-      summary: list users
+      summary: Get all users
+      tags:
+      - User
       responses:
         '200':
           description: successful
     post:
       summary: create user
+      tags:
+      - User
       responses:
         '200':
           description: successful
@@ -143,22 +147,9 @@ paths:
       schema:
         type: string
     get:
-      summary: show user
-      responses:
-        '200':
-          description: successful
-    patch:
-      summary: update user
-      responses:
-        '200':
-          description: successful
-    put:
-      summary: update user
-      responses:
-        '200':
-          description: successful
-    delete:
-      summary: delete user
+      summary: Get user by id
+      tags:
+      - User
       responses:
         '200':
           description: successful
