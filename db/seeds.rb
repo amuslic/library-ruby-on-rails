@@ -17,9 +17,11 @@ end
 
 # Seed Users
 5.times do
+  role = ['employee', 'member'].sample
   User.create(
     username: Faker::Internet.unique.username,
-    password: 'password'
+    password: 'password',
+    role: role
   )
 end
 
