@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
 
   resources :authors, only: [:index]
-  resources :loans, only: [:index, :create] do
+  resources :loans, only: [:index, :create, :show] do
     collection do
       get 'users/:user_id', to: 'loans#index_by_user', as: 'user_loans'
     end

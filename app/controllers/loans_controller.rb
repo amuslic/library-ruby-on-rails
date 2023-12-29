@@ -12,6 +12,12 @@ class LoansController < ApplicationController
     render json: @loans
   end
 
+  # GET /loans/1
+  def show
+    @loan_api_model = LoanApiModel.new(@loan) 
+    render json: @loan_api_model
+  end
+
   # GET /loans/users/:user_id
   def index_by_user
     begin
@@ -24,17 +30,17 @@ class LoansController < ApplicationController
     end
   end
 
-  # POST /loans
-  def create
-    @loan = Loan.new(loan_params)
+# POST /loans
+def create
+  @loan = Loan.new(loan_params)
 
-    if @loan.save
-      @loan_api_model = LoanApiModel.new(@loan)
-      render json: @loan_api_model, status: :created, location: @loan
-    else
-      render json: @loan.errors, status: :unprocessable_entity
-    end
+  if @loan.save
+    @loan_api_model = LoanApiModel.new(@loan)
+    render json: @loan_api_model, status: :created, location: @loan
+  else
+    render json: @loan.errors, status: :unprocessable_entity
   end
+end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -44,7 +50,7 @@ class LoansController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def loan_params
-      params.require(:loan).permit(:book_id, :user_id, :loan_date, :loan_duration)
+      params.require(:loan).permit(:book_id, :user_id, :loan_duration)
     end
 
     def authorize_employee
