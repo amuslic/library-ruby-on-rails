@@ -49,3 +49,6 @@ gem 'rspec-rails'
 
 gem 'rswag'
 
+gem 'faker'
+
+gem 'bcrypt'
