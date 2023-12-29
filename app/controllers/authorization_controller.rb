@@ -23,7 +23,7 @@ class AuthorizationController < ApplicationController
   end
 
   def encode_token(payload)
-    secret_key = Rails.application.secrets.secret_key_base || 'your_default_secret_key'
+    secret_key = Rails.application.config.x.jwt_secret_key.to_s
     JWT.encode(payload, secret_key, 'HS256')
   end
 end

@@ -15,6 +15,7 @@ module LibraryRubyOnRails
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w(assets tasks))
+    config.x.jwt_secret_key = 'your_default_secret_key'
 
     # Configuration for the application, engines, and railties goes here.
     #
