@@ -14,6 +14,14 @@ end
     author: author
   )
 end
+2.times do
+  author = Author.order('RANDOM()').first
+  Book.create(
+    title: Faker::Book.title,
+    hard_copies: 0,
+    author: author
+  )
+end
 
 # Seed Users
 5.times do
