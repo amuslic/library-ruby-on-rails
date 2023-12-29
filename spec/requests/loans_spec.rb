@@ -2,6 +2,28 @@ require 'swagger_helper'
 
 RSpec.describe 'loans', type: :request do
 
+  path '/loans/users/{user_id}' do
+    parameter name: 'user_id', 
+    in: :path, 
+    type: :string,
+    description: 'user_id'
+
+    get('index_by_user loan') do
+      tags Loan
+      response(200, 'successful') do
+        let(:user_id) { '123' }
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
+
   path '/loans' do
 
     get('list loans') do

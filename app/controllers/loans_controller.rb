@@ -13,6 +13,14 @@ class LoansController < ApplicationController
     render json: @loan
   end
 
+  # GET/loans/users/:user_id
+  def index_by_user
+    @user_loans = Loan.where(user_id: params[:user_id]).order(loan_date: :desc)
+    @user_loans_api_models = @user_loans.map { |user_loan| LoanApiModel.new(user_loan) }
+
+    render json: @user_loans_api_models
+  end
+
   # POST /loans
   def create
     @loan = Loan.new(loan_params)

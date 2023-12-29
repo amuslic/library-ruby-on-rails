@@ -90,6 +90,21 @@ paths:
       responses:
         '200':
           description: successful
+  "/loans/users/{user_id}":
+    parameters:
+    - name: user_id
+      in: path
+      description: user_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: index_by_user loan
+      tags:
+      - Loan
+      responses:
+        '200':
+          description: successful
   "/loans":
     get:
       summary: list loans
