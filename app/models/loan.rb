@@ -1,4 +1,6 @@
 class Loan < ApplicationRecord
+  MAX_ACTIVE_LOANS = 3
+  
   belongs_to :book
   belongs_to :user
 
@@ -30,7 +32,7 @@ class Loan < ApplicationRecord
     return unless user.present?
 
     active_loans_count = user.loans.where(active: true).count
-    errors.add(:base, 'User has reached the maximum allowed active loans') if active_loans_count >= 3
+    errors.add(:base, "User has reached the maximum allowed active loans (#{MAX_ACTIVE_LOANS})") if active_loans_count >= MAX_ACTIVE_LOANS
   end
 
   def set_loan_dates
