@@ -52,3 +52,5 @@ gem 'rswag'
 gem 'faker'
 
 gem 'bcrypt'
+
+gem 'jwt'

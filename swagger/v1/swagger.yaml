@@ -4,6 +4,25 @@ info:
   title: API V1
   version: v1
 paths:
+  "/login":
+    post:
+      summary: login auth
+      tags:
+      - Login
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
   "/authors":
     get:
       summary: list authors

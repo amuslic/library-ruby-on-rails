@@ -2,10 +2,15 @@ Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
   resources :users
+
+  #books
   get '/books/out-of-stock', to: 'books#index_out_of_stock'
   get '/books/search', to: 'books#search'
   get '/books/:id', to: 'books#show'
   get '/books', to: 'books#index'
+
+  #login
+  post '/login', to: 'authorization#login'
 
   resources :loans do
     collection do
