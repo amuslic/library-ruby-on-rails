@@ -1,16 +1,15 @@
 class LoansController < ApplicationController
+  include TokenDecoder
+
+  before_action :authorize_worker, only: [:index, :create]
+  before_action :authorize_worker_or_user, only: [:index_by_user]
   before_action :set_loan, only: %i[ show update destroy ]
 
   # GET /loans
   def index
     @loans = Loan.all
-
+    @user_loans_api_models = @loans.map { |loan| LoanApiModel.new(loan) }
     render json: @loans
-  end
-
-  # GET /loans/1
-  def show
-    render json: @loan
   end
 
   # GET/loans/users/:user_id
@@ -33,20 +32,6 @@ class LoansController < ApplicationController
     end
   end
 
-  # PATCH/PUT /loans/1
-  def update
-    if @loan.update(loan_params)
-      render json: @loan
-    else
-      render json: @loan.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /loans/1
-  def destroy
-    @loan.destroy!
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_loan
@@ -55,6 +40,20 @@ class LoansController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def loan_params
-      params.require(:loan).permit(:book_id, :user_id, :loan_date, :return_date, :loan_duration)
+      params.require(:loan).permit(:book_id, :user_id, :loan_date, :loan_duration)
+    end
+
+    def authorize_worker
+      decoded_token = decode_token
+      unless decoded_token && decoded_token[:role] == 'worker'
+        render json: { error: 'Unauthorized' }, status: :unauthorized
+      end
+    end
+  
+    def authorize_worker_or_user
+      decoded_token = decode_token
+      unless decoded_token && (decoded_token[:role] == 'worker' || decoded_token[:role] == 'user')
+        render json: { error: 'Unauthorized' }, status: :unauthorized
+      end
     end
 end

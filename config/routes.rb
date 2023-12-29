@@ -12,11 +12,10 @@ Rails.application.routes.draw do
   #login
   post '/login', to: 'authorization#login'
 
-  resources :loans do
-    collection do
-      get 'users/:user_id', action: :index_by_user, as: :by_user
-    end
-  end
+
+  resources :loans, only: [:index, :create]
+    get 'loans/users/:user_id', to: 'loans#index_by_user', as: 'user_loans'
+
   resources :authors
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
