@@ -40,7 +40,19 @@ RSpec.describe 'loans', type: :request do
       end
     end
 
-    post('create loan') do
+    post('Create a new loan') do
+      tags 'Loan'
+      consumes 'application/json'  
+      parameter name: :loan, in: :body, schema: {          
+      type: :object,          
+      properties: {            
+        user_id: { type: :string },            
+        book_id: { type: :string },
+        loan_duration: { type: :integer }   
+      },          
+      required: %w[name model]  
+      }      
+      produces 'application/json'  
       response(200, 'successful') do
 
         after do |example|

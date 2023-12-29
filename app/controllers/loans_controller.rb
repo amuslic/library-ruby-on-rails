@@ -26,7 +26,8 @@ class LoansController < ApplicationController
     @loan = Loan.new(loan_params)
 
     if @loan.save
-      render json: @loan, status: :created, location: @loan
+      @loan_api_model = LoanApiModel.new(@loan)
+      render json: @loan_api_model, status: :created, location: @loan
     else
       render json: @loan.errors, status: :unprocessable_entity
     end

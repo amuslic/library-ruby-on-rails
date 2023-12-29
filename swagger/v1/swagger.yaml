@@ -111,10 +111,28 @@ paths:
         '200':
           description: successful
     post:
-      summary: create loan
+      summary: Create a new loan
+      tags:
+      - Loan
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                book_id:
+                  type: string
+                loan_duration:
+                  type: integer
+              required:
+              - name
+              - model
   "/loans/{id}":
     parameters:
     - name: id

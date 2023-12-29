@@ -62,6 +62,7 @@ RSpec.describe 'books', type: :request do
     end
   end
   path '/books/{id}' do
+    parameter name: 'id', 
     in: :path, 
     type: :string, 
     description: 'id of the book we want to get data for'
