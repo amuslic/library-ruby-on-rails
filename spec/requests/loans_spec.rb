@@ -3,7 +3,7 @@ require 'swagger_helper'
 RSpec.describe 'loans', type: :request do
 
   path '/loans' do
-    get('list loans') do
+    get('Get all loans') do
       tags Loan
       response(200, 'successful') do
 
@@ -50,9 +50,9 @@ RSpec.describe 'loans', type: :request do
     parameter name: 'user_id', 
               in: :path, 
               type: :string,
-              description: 'user_id'
+              description: 'User id for which we want to get loans'
   
-    get('index_by_user loan') do
+    get('Get all user loans') do
       tags Loan
       response(200, 'successful') do
         let(:user_id) { '123' }

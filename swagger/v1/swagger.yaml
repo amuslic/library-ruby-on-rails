@@ -6,7 +6,7 @@ info:
 paths:
   "/login":
     post:
-      summary: login auth
+      summary: User login
       tags:
       - Login
       parameters: []
@@ -78,12 +78,12 @@ paths:
         '200':
           description: successful
         '404':
-          description: Book not found
+          description: book not found
   "/loans":
     get:
       security:
       - jwt: []
-      summary: list loans
+      summary: Get all loans
       tags:
       - Loan
       responses:
@@ -118,14 +118,14 @@ paths:
     parameters:
     - name: user_id
       in: path
-      description: user_id
+      description: User id for which we want to get loans
       required: true
       schema:
         type: string
     get:
       security:
       - jwt: []
-      summary: index_by_user loan
+      summary: Get all user loans
       tags:
       - Loan
       responses:
@@ -141,18 +141,11 @@ paths:
       responses:
         '200':
           description: successful
-    post:
-      summary: create user
-      tags:
-      - User
-      responses:
-        '200':
-          description: successful
   "/users/{id}":
     parameters:
     - name: id
       in: path
-      description: id
+      description: id of the user we want to fetch
       required: true
       schema:
         type: string

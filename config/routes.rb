@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
 
-  resources :users, only: [:index, :show, :create]
+  resources :users, only: [:index, :show]
 
   resources :authors, only: [:index]
   resources :loans, only: [:index, :create] do

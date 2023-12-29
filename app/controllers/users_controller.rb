@@ -5,24 +5,13 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @users_api_models = @users.map { |user| UserApiModel.new(user) }
-    render json: @users
+    render json: @users_api_models
   end
 
   # GET /users/1
   def show
     @users_api_model =  UserApiModel.new(@user) 
-    render json: @user
-  end
-
-  # POST /users
-  def create
-    @user = User.new(user_params)
-
-    if @user.save
-      render json: @user, status: :created, location: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
+    render json: @users_api_model
   end
 
   private
