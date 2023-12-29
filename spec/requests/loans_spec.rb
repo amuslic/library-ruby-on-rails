@@ -3,8 +3,8 @@ require 'swagger_helper'
 RSpec.describe 'loans', type: :request do
 
   path '/loans' do
-
     get('list loans') do
+      tags Loan
       response(200, 'successful') do
 
         after do |example|
@@ -19,7 +19,7 @@ RSpec.describe 'loans', type: :request do
     end
 
     post('Create a new loan') do
-      tags 'Loan'
+      tags Loan
       consumes 'application/json'  
       parameter name: :loan, in: :body, schema: {          
       type: :object,          

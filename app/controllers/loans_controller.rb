@@ -1,8 +1,8 @@
 class LoansController < ApplicationController
   include TokenDecoder
 
-  before_action :authorize_worker, only: [:index, :create]
-  before_action :authorize_worker_or_user, only: [:index_by_user]
+  before_action :authorize_employee, only: [:index, :create]
+  before_action :authorize_employee_or_member, only: [:index_by_user]
   before_action :set_loan, only: %i[ show update destroy ]
 
   # GET /loans
@@ -43,16 +43,18 @@ class LoansController < ApplicationController
       params.require(:loan).permit(:book_id, :user_id, :loan_date, :loan_duration)
     end
 
-    def authorize_worker
-      decoded_token = decode_token
-      unless decoded_token && decoded_token[:role] == 'worker'
+    def authorize_employee
+      decoded_token = decode_token()
+
+      unless decoded_token && decoded_token[:role] == 'employee'
         render json: { error: 'Unauthorized' }, status: :unauthorized
       end
     end
   
-    def authorize_worker_or_user
-      decoded_token = decode_token
-      unless decoded_token && (decoded_token[:role] == 'worker' || decoded_token[:role] == 'user')
+    def authorize_employee_or_member
+      decoded_token = decode_token()
+
+      unless decoded_token && (decoded_token[:role] == 'employee' || decoded_token[:role] == 'member')
         render json: { error: 'Unauthorized' }, status: :unauthorized
       end
     end
