@@ -20,6 +20,15 @@ class BooksController < ApplicationController
     render json: @outOfStockBooksApiModels
   end
 
+   # GET /books/search?term=example
+  def search
+    term = params[:term].downcase
+    @books = Book.joins(:author)
+                 .where('lower(books.title) LIKE ? OR lower(authors.name) LIKE ?', "%#{term}%", "%#{term}%")
+    @books_api_models = @books.map { |book| BookApiModel.new(book) }
+    render json: @books_api_models
+  end
+
   # POST /books
   def create
     @book = Book.new(book_params)

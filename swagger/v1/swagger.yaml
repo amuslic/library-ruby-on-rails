@@ -43,6 +43,21 @@ paths:
       responses:
         '200':
           description: successful
+  "/books/search":
+    get:
+      summary: Search book by author or title name
+      tags:
+      - Book
+      parameters:
+      - name: term
+        in: query
+        description: term
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
   "/books/out-of-stock":
     get:
       summary: Get books that are out of stock

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :users
   resources :books do
     collection do
+      get 'search'
       get 'out-of-stock', to: 'books#index_out_of_stock'
     end
   end
