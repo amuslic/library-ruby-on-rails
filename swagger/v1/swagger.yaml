@@ -1,0 +1,167 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/authors":
+    get:
+      summary: list authors
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create author
+      responses:
+        '200':
+          description: successful
+  "/authors/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show author
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update author
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update author
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete author
+      responses:
+        '200':
+          description: successful
+  "/books":
+    get:
+      summary: list books
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create book
+      responses:
+        '200':
+          description: successful
+  "/books/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show book
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update book
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update book
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete book
+      responses:
+        '200':
+          description: successful
+  "/loans":
+    get:
+      summary: list loans
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create loan
+      responses:
+        '200':
+          description: successful
+  "/loans/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show loan
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update loan
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update loan
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete loan
+      responses:
+        '200':
+          description: successful
+  "/users":
+    get:
+      summary: list users
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create user
+      responses:
+        '200':
+          description: successful
+  "/users/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show user
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update user
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update user
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete user
+      responses:
+        '200':
+          description: successful
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: 127.0.0.1:3000/
