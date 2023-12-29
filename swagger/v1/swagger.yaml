@@ -43,15 +43,23 @@ paths:
       responses:
         '200':
           description: successful
+  "/books":
+    get:
+      summary: List all books
+      tags:
+      - Book
+      responses:
+        '200':
+          description: successful
   "/books/search":
     get:
       summary: Search book by author or title name
       tags:
       - Book
       parameters:
-      - name: term
+      - name: searchTerm
         in: query
-        description: term
+        description: term to search by book title or author name
         required: true
         schema:
           type: string
@@ -66,42 +74,18 @@ paths:
       responses:
         '200':
           description: successful
-  "/books":
-    get:
-      summary: list books
-      responses:
-        '200':
-          description: successful
-    post:
-      summary: create book
-      responses:
-        '200':
-          description: successful
   "/books/{id}":
     parameters:
     - name: id
       in: path
-      description: id
+      description: id of the book we want to get data for
       required: true
       schema:
         type: string
     get:
-      summary: show book
-      responses:
-        '200':
-          description: successful
-    patch:
-      summary: update book
-      responses:
-        '200':
-          description: successful
-    put:
-      summary: update book
-      responses:
-        '200':
-          description: successful
-    delete:
-      summary: delete book
+      summary: Get book by id
+      tags:
+      - Book
       responses:
         '200':
           description: successful
