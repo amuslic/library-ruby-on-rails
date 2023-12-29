@@ -13,6 +13,13 @@ class BooksController < ApplicationController
     render json: @book
   end
 
+  # GET /books/out-of-stock
+  def index_out_of_stock
+    @outOfStockBooks = Book.where(hard_copies: 0)
+    @outOfStockBooksApiModels = @outOfStockBooks.map { |outOfStockBook| BookApiModel.new(outOfStockBook) }
+    render json: @outOfStockBooksApiModels
+  end
+
   # POST /books
   def create
     @book = Book.new(book_params)

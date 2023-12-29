@@ -43,6 +43,14 @@ paths:
       responses:
         '200':
           description: successful
+  "/books/out-of-stock":
+    get:
+      summary: Get books that are out of stock
+      tags:
+      - Book
+      responses:
+        '200':
+          description: successful
   "/books":
     get:
       summary: list books

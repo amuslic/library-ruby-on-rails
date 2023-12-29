@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   resources :loans
   resources :users
-  resources :books
+  resources :books do
+    collection do
+      get 'out-of-stock', to: 'books#index_out_of_stock'
+    end
+  end
   resources :authors
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
