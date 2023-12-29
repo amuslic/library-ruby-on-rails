@@ -1,24 +1,39 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Ruby on Rails Demo Library App
 
-Things you may want to cover:
+A simple Ruby on Rails demo library app with SQLite, showcasing CRUD operations and a RESTful API with Swagger documentation.
 
-* Ruby version
+## Getting Started
 
-* System dependencies
+### Clone the repository
+First clone the repo on your local computer
 
-* Configuration
+### Install dependencies
+```bash
+bundle install
+```
 
-* Database creation
+### Database setup and seed data
+Since we are using SQLite database, run the following commands to create the database and populate it with test data
 
-* Database initialization
+```bash
+rails db:create
+rails db:migrate
+rails db:seed
+```
 
-* How to run the test suite
+### Start the Rails server and navigate to Swagger docs
+```bash
+rails s
+```
+And navigate to {defaultport}/api-docs/index.html to see swagger definition and test the routes
 
-* Services (job queues, cache servers, search engines, etc.)
+### Authentication
 
-* Deployment instructions
+For authentication, use the following credentials:
 
-* ...
+- **Username:** Any username (e.g., for getting users).
+- **Password:** "password"
+
+To access routes that require an employee role (e.g., create and get all loans), use a user with the role "employee".
