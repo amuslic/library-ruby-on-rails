@@ -48,10 +48,10 @@ RSpec.describe 'loans', type: :request do
   
   path '/loans/users/{user_id}' do
     parameter name: 'user_id', 
-    in: :path, 
-    type: :string,
-    description: 'user_id'
-
+              in: :path, 
+              type: :string,
+              description: 'user_id'
+  
     get('index_by_user loan') do
       tags Loan
       response(200, 'successful') do
@@ -63,6 +63,11 @@ RSpec.describe 'loans', type: :request do
             }
           }
         end
+        run_test!
+      end
+  
+      response(404, 'User not found') do
+        let(:user_id) { 'nonexistent_user_id' }
         run_test!
       end
     end

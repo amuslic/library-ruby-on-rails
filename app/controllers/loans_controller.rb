@@ -12,12 +12,16 @@ class LoansController < ApplicationController
     render json: @loans
   end
 
-  # GET/loans/users/:user_id
+  # GET /loans/users/:user_id
   def index_by_user
-    @user_loans = Loan.where(user_id: params[:user_id]).order(loan_date: :desc)
-    @user_loans_api_models = @user_loans.map { |user_loan| LoanApiModel.new(user_loan) }
+    begin
+      @user_loans = Loan.where(user_id: params[:user_id]).order(loan_date: :desc)
+      @user_loans_api_models = @user_loans.map { |user_loan| LoanApiModel.new(user_loan) }
 
-    render json: @user_loans_api_models
+      render json: @user_loans_api_models
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: 'User not found' }, status: :not_found
+    end
   end
 
   # POST /loans

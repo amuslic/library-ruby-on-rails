@@ -81,6 +81,10 @@ RSpec.describe 'books', type: :request do
         end
         run_test!
       end
+      response(404, 'book not found') do
+        let(:user_id) { 'nonexistent_book_id' }
+        run_test!
+      end
     end
   end
 end

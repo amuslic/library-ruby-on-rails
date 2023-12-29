@@ -9,9 +9,13 @@ class BooksController < ApplicationController
 
   # GET /books/1
   def show
-    @book = Book.find(params[:id])
-    @books_api_model =  BookApiModel.new(@book) 
-    render json: @books_api_model
+    begin
+      @book = Book.find(params[:id])
+      @books_api_model = BookApiModel.new(@book)
+      render json: @books_api_model
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: 'Book not found' }, status: :not_found
+    end
   end
 
   # GET /books/out-of-stock
